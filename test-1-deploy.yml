@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-deploy-1
+  name: test-deploy-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deploy-1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-deploy-1
+    spec:
+      volumes:
+      - name: html
+        emptyDir: {}
+      containers:
+       - image: nginx
+         name: 1stcontainer
+         resources: {}
+         volumeMounts:
+         - name: html
+           mountPath: /usr/share/nginx/html
+       - image: debian
+         name: 2ndcontainer
+         resources: {}
+         volumeMounts:
+         - name: html
+           mountPath: /html
+         command: ["/bin/sh", "-c"]
+         args:
+         - while true; do
+             date >> /html/index.html;
+             sleep 1;
+           done
+status: {}

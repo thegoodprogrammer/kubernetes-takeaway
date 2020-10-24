@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-deploy-ing-webapp1
+  name: test-deploy-ing-webapp1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deploy-ing-webapp1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-deploy-ing-webapp1
+    spec:
+      containers:
+       - image: thegoodprogrammer/kubernetes-takeaway:docker-http-server
+         imagePullPolicy: Always
+         name: webapp1
+         ports:
+         - containerPort: 80
+           protocol: TCP
+         resources: {}
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-deploy-ing-webapp2
+  name: test-deploy-ing-webapp2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deploy-ing-webapp2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-deploy-ing-webapp2
+    spec:
+      containers:
+       - image: thegoodprogrammer/kubernetes-takeaway:docker-http-server
+         imagePullPolicy: Always
+         name: webapp2
+         ports:
+         - containerPort: 80
+           protocol: TCP
+         resources: {}
+status: {}

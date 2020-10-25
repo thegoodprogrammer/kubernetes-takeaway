@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-deploy-1
+  name: myserviceing1
+  annotations:
+    haproxy.org/check: "enabled"
+    haproxy.org/forwarded-for: "enabled"
+    haproxy.org/load-balance: "roundrobin"
+spec:
+  selector:
+    app: test-deploy-1
+  ports:
+  - name: port-1
+    port: 80
+    protocol: TCP
+    targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: test-deploy-2
+  name: myserviceing2
+  annotations:
+    haproxy.org/check: "enabled"
+    haproxy.org/forwarded-for: "enabled"
+    haproxy.org/load-balance: "roundrobin"
+spec:
+  selector:
+    run: test-deploy-2
+  ports:
+  - name: port-1
+    port: 80
+    protocol: TCP
+    targetPort: 80
